@@ -6,7 +6,7 @@ execute_ssh(){
   ssh -q -t -i "$HOME/.ssh/id_rsa" \
       -o UserKnownHostsFile=/dev/null \
       -p $INPUT_REMOTE_DOCKER_PORT \
-      -o StrictHostKeyChecking=no "$INPUT_REMOTE_DOCKER_HOST" "$@"
+      -o StrictHostKeyChecking=no "$INPUT_REMOTE_DOCKER_HOST" env "$@"
 }
 
 if [ -z "$INPUT_REMOTE_DOCKER_PORT" ]; then
