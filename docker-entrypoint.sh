@@ -83,11 +83,24 @@ ssh-add "$HOME/.ssh/id_rsa"
 echo "Add known hosts"
 printf '%s %s\n' "$SSH_HOST" "$INPUT_SSH_PUBLIC_KEY" > /etc/ssh/ssh_known_hosts
 
+# while read line; 
+# do 
+#   envarline="$line='${!line}' "
+#   ALLVARS+="${envarline}"
+# done <<< $(grep -oP "(?<=\{).*(?=})" $STACK_FILE | uniq)
+
+ALLVARS=''
 while read line; 
 do 
-  envarline="$line='${!line}' "
-  ALLVARS+="${envarline}"
-done <<< $(grep -oP "(?<=\{).*(?=})" $STACK_FILE | uniq)
+    # echo $(env  | grep $line | grep -oe '[^=]*$') 
+    envarline="$line='$(env  | grep $line | grep -oe '[^=]*$')' "
+    ALLVARS="$ALLVARS $envarline"
+done <<EOF 
+$(grep -oP "(?<=\{).*(?=})" $STACK_FILE | uniq)
+EOF
+
+ALLVARS="$ALLVARS ;"
+echo $ALLVARS
 
 if ! [ -z "$INPUT_DOCKER_PRUNE" ] && [ $INPUT_DOCKER_PRUNE = 'true' ] ; then
   yes | docker --log-level debug --host "ssh://$INPUT_REMOTE_DOCKER_HOST:$INPUT_REMOTE_DOCKER_PORT" system prune -a 2>&1
