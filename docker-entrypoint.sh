@@ -89,7 +89,7 @@ printf '%s %s\n' "$SSH_HOST" "$INPUT_SSH_PUBLIC_KEY" > /etc/ssh/ssh_known_hosts
 #   ALLVARS+="${envarline}"
 # done <<< $(grep -oP "(?<=\{).*(?=})" $STACK_FILE | uniq)
 
-ALLVARS=''
+ALLVARS=""
 while read line; 
 do 
     # echo $(env  | grep $line | grep -oe '[^=]*$') 
