@@ -97,7 +97,6 @@ ALLVARS="$ALLVARS $envarline"
 echo $ALLVARS
 done
 
-ALLVARS="$ALLVARS ;"
 echo $ALLVARS
 
 if ! [ -z "$INPUT_DOCKER_PRUNE" ] && [ $INPUT_DOCKER_PRUNE = 'true' ] ; then
