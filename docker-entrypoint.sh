@@ -91,7 +91,7 @@ ALLVARS=""
 for LINE in $VARIABLES
 do
 echo $LINE
-envarline="$LINE='$(env  | grep -w $LINE | grep -oe '[^=]*$')' "
+envarline="$LINE='$(env  | grep -w $LINE | cut -d '=' -f 2- )' "
 echo $envarline
 ALLVARS="$ALLVARS $envarline"
 echo $ALLVARS
