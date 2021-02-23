@@ -100,7 +100,7 @@ ALLVARS=""
 # $(grep -oP "(?<=\{).*(?=})" $INPUT_STACK_FILE_NAME  | uniq)
 # EOF
 
-ALLVARS="$ALLVARS ;"
+ALLVARS="\"$ALLVARS ;\""
 
 if ! [ -z "$INPUT_DOCKER_PRUNE" ] && [ $INPUT_DOCKER_PRUNE = 'true' ] ; then
   yes | docker --log-level debug --host "ssh://$INPUT_REMOTE_DOCKER_HOST:$INPUT_REMOTE_DOCKER_PORT" system prune -a 2>&1
