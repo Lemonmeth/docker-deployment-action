@@ -90,11 +90,15 @@ echo $VARIABLES
 ALLVARS=""
 for LINE in $VARIABLES
 do
+echo $LINE
 envarline="$LINE='$(env  | grep -w $LINE | grep -oe '[^=]*$')' "
+echo $envarline
 ALLVARS="$ALLVARS $envarline"
+echo $ALLVARS
 done
 
 ALLVARS="\"$ALLVARS ;\""
+echo $ALLVARS
 
 if ! [ -z "$INPUT_DOCKER_PRUNE" ] && [ $INPUT_DOCKER_PRUNE = 'true' ] ; then
   yes | docker --log-level debug --host "ssh://$INPUT_REMOTE_DOCKER_HOST:$INPUT_REMOTE_DOCKER_PORT" system prune -a 2>&1
