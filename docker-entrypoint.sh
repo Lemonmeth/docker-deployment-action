@@ -90,7 +90,7 @@ printf '%s %s\n' "$SSH_HOST" "$INPUT_SSH_PUBLIC_KEY" > /etc/ssh/ssh_known_hosts
 # done <<< $(grep -oP "(?<=\{).*(?=})" $STACK_FILE | uniq)
 
 TESTLINE="GITHUB_REPOSITORY"
-echo "GITHUB_REPOSITORY='$(env  | grep $TESTLINE | grep -oe \"[^=]*$\")' "
+echo "$TESTLINE='$(env  | grep $TESTLINE | grep -oe '[^=]*$')' "
 
 ALLVARS=""
 while read line; 
