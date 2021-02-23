@@ -83,10 +83,11 @@ ssh-add "$HOME/.ssh/id_rsa"
 echo "Add known hosts"
 printf '%s %s\n' "$SSH_HOST" "$INPUT_SSH_PUBLIC_KEY" > /etc/ssh/ssh_known_hosts
 
+
 # environment variables
 VARIABLES="$(grep -oP "(?<=\{).*(?=})" $INPUT_STACK_FILE_NAME | uniq)"
 echo $VARIABLES
-
+ALLVARS=""
 for LINE in $VARIABLES
 do
 envarline="$LINE='$(env  | grep -w $LINE | grep -oe '[^=]*$')' "
