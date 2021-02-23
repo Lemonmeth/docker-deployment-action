@@ -51,7 +51,7 @@ STACK_FILE=${INPUT_STACK_FILE_NAME}
 DEPLOYMENT_COMMAND_OPTIONS=""
 
 
-if [ "$INPUT_COPY_STACK_FILE" == "true" ]; then
+if [ X"$INPUT_COPY_STACK_FILE" = X"true" ]; then
   STACK_FILE="$INPUT_DEPLOY_PATH/$STACK_FILE"
 else
   DEPLOYMENT_COMMAND_OPTIONS=" --log-level debug --host ssh://$INPUT_REMOTE_DOCKER_HOST:$INPUT_REMOTE_DOCKER_PORT"
@@ -83,26 +83,15 @@ ssh-add "$HOME/.ssh/id_rsa"
 echo "Add known hosts"
 printf '%s %s\n' "$SSH_HOST" "$INPUT_SSH_PUBLIC_KEY" > /etc/ssh/ssh_known_hosts
 
-# while read line; 
-# do 
-#   envarline="$line='${!line}' "
-#   ALLVARS+="${envarline}"
-# done <<< $(grep -oP "(?<=\{).*(?=})" $STACK_FILE | uniq)
+# environment variables
+VARIABLES="$(grep -oP "(?<=\{).*(?=})" $INPUT_STACK_FILE_NAME | uniq)"
+echo $VARIABLES
 
-echo $(grep -oP "(?<=\{).*(?=})" $INPUT_STACK_FILE_NAME  | uniq)
-
-TESTLINE="GITHUB_REPOSITORY"
-echo "$TESTLINE='$(env  | grep $TESTLINE | grep -oe '[^=]*$')' "
-
-ALLVARS=""
-while read line; 
-do 
-    # echo $(env  | grep $line | grep -oe '[^=]*$') 
-    envarline="$line='$(env  | grep $line | grep -oe \"[^=]*$\")' "
-    ALLVARS="$ALLVARS $envarline"
-done <<EOF 
-$(grep -oP "(?<=\{).*(?=})" $INPUT_STACK_FILE_NAME  | uniq)
-EOF
+for LINE in $VARIABLES
+do
+envarline="$LINE='$(env  | grep -w $LINE | grep -oe '[^=]*$')' "
+ALLVARS="$ALLVARS $envarline"
+done
 
 ALLVARS="\"$ALLVARS ;\""
 
