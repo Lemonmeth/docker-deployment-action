@@ -89,6 +89,8 @@ printf '%s %s\n' "$SSH_HOST" "$INPUT_SSH_PUBLIC_KEY" > /etc/ssh/ssh_known_hosts
 #   ALLVARS+="${envarline}"
 # done <<< $(grep -oP "(?<=\{).*(?=})" $STACK_FILE | uniq)
 
+echo $(grep -oP "(?<=\{).*(?=})" $INPUT_STACK_FILE_NAME  | uniq)
+
 TESTLINE="GITHUB_REPOSITORY"
 echo "$TESTLINE='$(env  | grep $TESTLINE | grep -oe '[^=]*$')' "
 
