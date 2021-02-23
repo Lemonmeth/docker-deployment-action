@@ -90,14 +90,14 @@ printf '%s %s\n' "$SSH_HOST" "$INPUT_SSH_PUBLIC_KEY" > /etc/ssh/ssh_known_hosts
 # done <<< $(grep -oP "(?<=\{).*(?=})" $STACK_FILE | uniq)
 
 ALLVARS=""
-while read line; 
-do 
-    # echo $(env  | grep $line | grep -oe '[^=]*$') 
-    envarline="$line='$(env  | grep $line | grep -oe '[^=]*$')' "
-    ALLVARS="$ALLVARS $envarline"
-done <<EOF 
-$(grep -oP "(?<=\{).*(?=})" $INPUT_STACK_FILE_NAME  | uniq)
-EOF
+# while read line; 
+# do 
+#     # echo $(env  | grep $line | grep -oe '[^=]*$') 
+#     envarline="$line='$(env  | grep $line | grep -oe '[^=]*$')' "
+#     ALLVARS="$ALLVARS $envarline"
+# done <<EOF 
+# $(grep -oP "(?<=\{).*(?=})" $INPUT_STACK_FILE_NAME  | uniq)
+# EOF
 
 ALLVARS="$ALLVARS ;"
 
