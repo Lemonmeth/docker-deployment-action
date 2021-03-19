@@ -90,11 +90,11 @@ echo $VARIABLES
 ALLVARS=""
 for LINE in $VARIABLES
 do
-echo $LINE
+# echo $LINE
 envarline="$LINE='$(env  | grep -w $LINE | cut -d '=' -f 2- )' "
 echo $envarline
 ALLVARS="$ALLVARS $envarline"
-echo $ALLVARS
+# echo $ALLVARS
 done
 
 echo $ALLVARS
