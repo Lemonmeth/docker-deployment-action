@@ -42,6 +42,9 @@ inputs:
   pull_images_first:
     description: Pull docker images before deploying.
     required: false
+  copy_files:
+    description: List of files to copy before deploy separated by spaces.
+    required: false
 
 runs:
   using: docker
