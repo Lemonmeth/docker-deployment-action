@@ -45,11 +45,8 @@ inputs:
   copy_files:
     description: List of files to copy before deploy separated by spaces.
     required: false
-  create_sub_folder:
-    description: Create a folder with write persmissions (example: for logs, data, etc)
-    required: false
   sub_folder_name:
-    description: sub folder name
+    description: Create a folder with write persmissions (example: for logs, data, etc)
     required: false
 
 runs:
