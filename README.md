@@ -7,21 +7,23 @@ A [GitHub Action](https://github.com/marketplace/actions/docker-deployment) that
 Below is a brief example on how the action can be used:
 
 ```yaml
-- name: Deploy to Docker swarm
-  uses: wshihadeh/docker-deployment-action@v3
+- name: Deploy to Docker compose
+  uses: fabiel-leon/docker-deployment-action@master
   env:
     PORT: ${{ secrets.PORT }}
     DB_NAME: ${{ secrets.DB_NAME }}
   with:
     remote_docker_host: user@myswarm.com
+    remote_docker_port: "12222"
     ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
     ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
-    deployment_mode: docker-swarm
+    deployment_mode: docker-compose
     copy_stack_file: true
     deploy_path: /root/my-deployment
     stack_file_name: docker-compose.yaml
     keep_files: 5
     args: my_applicaion
+    sub_folder_name: logs
 ```
 
 ## Input Configurations
@@ -62,6 +64,10 @@ Deployment mode either docker-swarm or docker-compose. Default is docker-compose
 ### `copy_stack_file`
 
 Copy stack file to remote server and deploy from the server. Default is false.
+
+### `sub_folder_name`
+
+Create a folder with write permissions.
 
 ### `deploy_path`
 
