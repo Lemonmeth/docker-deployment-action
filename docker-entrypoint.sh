@@ -123,6 +123,10 @@ if ! [ -z "$INPUT_COPY_STACK_FILE" ] && [ $INPUT_COPY_STACK_FILE = 'true' ] ; th
         -P $INPUT_REMOTE_DOCKER_PORT \
         $INPUT_COPY_FILES "$INPUT_REMOTE_DOCKER_HOST:$INPUT_DEPLOY_PATH/"
   fi
+  
+  if ! [ -z "$INPUT_SUB_FOLDER_NAME" ] ; then
+     execute_ssh "(mkdir -p $INPUT_DEPLOY_PATH/$INPUT_SUB_FOLDER_NAME && chmod 777 -R $INPUT_DEPLOY_PATH/$INPUT_SUB_FOLDER_NAME) || true"
+  fi
 
   if ! [ -z "$INPUT_PULL_IMAGES_FIRST" ] && [ $INPUT_PULL_IMAGES_FIRST = 'true' ] && [ $INPUT_DEPLOYMENT_MODE = 'docker-compose' ] ; then
     execute_ssh "$ALLVARS" "${DEPLOYMENT_COMMAND} pull"
