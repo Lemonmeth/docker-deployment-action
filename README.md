@@ -67,7 +67,7 @@ Copy stack file to remote server and deploy from the server. Default is false.
 
 ### `sub_folder_name`
 
-Create a folder with write permissions.
+Create a folder with write permissions (example: for logs, data, etc).
 
 ### `deploy_path`
 
