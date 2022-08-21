@@ -1,5 +1,5 @@
 name: Docker Deployment
-author: Al-waleed Shihadeh <wshihadeh.dev@gmail.com>
+author: Al-waleed Shihadeh <wshihadeh.dev@gmail.com> Fabiel Leon <fabiel.leon.oliva@gmail.com> 
 description: A GitHub Action that supports docker-compose and Docker Swarm deployments
 inputs:
   remote_docker_host:
@@ -46,7 +46,7 @@ inputs:
     description: List of files to copy before deploy separated by spaces.
     required: false
   sub_folder_name:
-    description: Create a folder with write persmissions (example: for logs, data, etc)
+    description: Create a folder with write persmissions (for logs or any data)
     required: false
 
 runs:
