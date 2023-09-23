@@ -1,4 +1,4 @@
-FROM docker:stable
+FROM docker:latest
 
 LABEL 'name'='Docker Deployment Action'
 LABEL 'maintainer'='Al-waleed Shihadeh <wshihadeh.dev@gmail.com>'
